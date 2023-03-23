@@ -31,7 +31,7 @@ def run(gpus, log_file, seq, run_opt, run_vis, overwrite=False, argstr=""):
     worker_id = cur_proc._identity[0] - 1  # 1-indexed processes
     gpu = gpus[worker_id % len(gpus)]
     cmd = (
-        f"CUDA_VISIBLE_DEVICES={gpu} EGL_DEVICE_ID={gpu} PYOPENGL_PLATFORM=egl "
+        f"CUDA_VISIBLE_DEVICES={gpu} EGL_DEVICE_ID={gpu} PYOPENGL_PLATFORM=osmesa "
         f"python run_opt.py run_opt={run_opt} run_vis={run_vis} {argstr} "
     )
     if seq is not None:

@@ -217,7 +217,7 @@ def launch_vis(i, args):
     log_dir = args.log_dirs[i]
     dev_id = args.gpus[i % len(args.gpus)]
     os.environ["EGL_DEVICE_ID"] = str(dev_id)
-    os.environ["PYOPENGL_PLATFORM"] = "egl"
+    os.environ["PYOPENGL_PLATFORM"] = "osmesa"
 
     if args.save_root is not None:
         path_name = log_dir.split(args.log_root)[-1].strip("/")

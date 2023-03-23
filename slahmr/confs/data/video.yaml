@@ -1,8 +1,8 @@
 type: video
 split: val
-root: /path/to/data  # put your videos in root/videos/vid.mp4
+root: /Documents/slahmr/input  # put your videos in root/videos/vid.mp4
 video_dir: videos
-seq: basketball 
+seq: hiphop
 ext: mp4
 src_path: ${data.root}/${data.video_dir}/${data.seq}.${data.ext}
 frame_opts:

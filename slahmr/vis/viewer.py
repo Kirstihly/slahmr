@@ -6,7 +6,7 @@ import time
 import torch
 import trimesh
 
-os.environ["PYOPENGL_PLATFORM"] = "egl"
+os.environ["PYOPENGL_PLATFORM"] = "osmesa"
 
 import pyrender
 from pyrender.constants import RenderFlags
@@ -34,8 +34,8 @@ def init_viewer(
         print("VIS", vis)
         return vis
 
-    if platform != "egl":
-        raise NotImplementedError
+    if platform != "egl" and platform != "osmesa":
+         raise NotImplementedError
 
     vis = OffscreenAnimation(img_size, intrins=intrins, fps=fps)
     if bg_paths is not None:
@@ -294,7 +294,10 @@ class OffscreenAnimation(AnimationBase):
             t = min(self.anim_idx, len(self.bg_seq) - 1)
             bg = self.bg_seq[t]
             rgba = rgba.astype(np.float32) / 255
-            alpha = fac * rgba[..., 3:]
+            if rgba.shape[2] == 4:
+                alpha = fac * rgba[..., 3:]
+            else:
+                alpha = fac
             img = alpha * rgba[..., :3] + (1 - alpha) * bg
             img = (255 * img).astype(np.uint8)
 
